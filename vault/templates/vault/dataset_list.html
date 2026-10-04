@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datasets</title>
+</head>
+<body>
+    <h1>Uploaded Datasets</h1>
+    {% if datasets %}
+        <ul>
+            {% for dataset in datasets %}
+                <li>
+                    <strong>{{ dataset.name }}</strong>
+                    <br>
+                    File: {{ dataset.file.name }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p> No datasets uploaded yet.</p>
+    {% endif %}
+</body>
+</html>
