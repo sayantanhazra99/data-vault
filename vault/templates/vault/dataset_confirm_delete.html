@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Dataset</title>
+</head>
+<body>
+    <h1>Delete Dataset</h1>
+    <p>Are you sure yoy want to delete</p>
+    <strong>{{dataset.name}}</strong>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, Delete</button>
+        <a href="{% url 'dataset_detail' dataset.id %}">Cancel</a>
+    </form>
+    
+    
+</body>
+</html>

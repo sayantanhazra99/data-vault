@@ -3,6 +3,7 @@ from django.http import HttpRequest, HttpResponse
 from .forms import DatasetUploadForm
 from .models import Dataset
 import pandas as pd
+from django.shortcuts import get_object_or_404, redirect
 
 def upload_dataset(request:HttpRequest) -> HttpResponse:
     if request.method == "POST":
@@ -30,3 +31,10 @@ def dataset_detail(request: HttpRequest, dataset_id) ->HttpResponse:
     }
     return render(request, "vault/dataset_detail.html", context)
 
+def delete_dataset(request: HttpRequest, dataset_id: int) ->HttpResponse:
+    dataset = get_object_or_404(Dataset, id=dataset_id)
+    if request.method == "POST":
+        dataset.file.delete(save=False)
+        dataset.delete()
+        return redirect("dataset_list")
+    return render(request, "vault/dataset_confirm_delete.html", {"dataset": dataset})
